@@ -38,4 +38,4 @@ License
 MIT License.
 
 
-   [0]: https://github.com/Ralt/vim-modes/issues
+   [0]: https://github.com/Ralt/vim-modes/issues?labels=enhancement&page=1&state=open
