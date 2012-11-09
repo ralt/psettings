@@ -4,3 +4,4 @@
 " Author:        Florian Margaine <florian@margaine.com>
 " =============================================================================
 
+set shiftwidth=2
