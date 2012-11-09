@@ -17,10 +17,31 @@ This project solves this.
 Usage
 ---
 
-    :call Mode("Drupal")
+Put a `.mode` file at the root of your project. In this file, put the following
+line:
 
-Currently, this is the only API available. But this plugin was created last
-night.
+    Drupal
+
+That is, if you want to use the `Drupal` mode.
+
+The default modes are in the `modes/` folder of this plugin. You can add
+your own mode by putting the following in your vimrc:
+
+    let g:modes_custom_path = '/your/path/to/modes/'
+
+If a mode is found in both folders, both will be used.
+
+The names you put in the `.mode` file must match the filename of the mode, less
+the `.vim` extension.
+
+You can put several modes in your `.mode` file, each mode will be read
+sequentially. This allows you to have one "major" mode (for example, all the
+projects in the PHP language), and several "minor" modes (Drupal projects,
+Symfony projects, Zend projects, etc).
+
+If you simply want to run a mode, you can also run the following command:
+
+    :call Mode("Drupal")
 
 Roadmap
 ---

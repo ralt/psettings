@@ -35,9 +35,9 @@ function! Mode(mode)
     endif
 
     " Read custom path added if it exists
-    if exists('g:vim_modes_custom_path')
-        if filereadable(g:vim_modes_custom_path)
-            execute 'source ' . g:vim_modes_custom_path
+    if exists('g:modes_custom_path')
+        if filereadable(g:modes_custom_path)
+            execute 'source ' . g:modes_custom_path
         endif
     endif
 endfunction
@@ -45,6 +45,8 @@ endfunction
 " Find the .mode file
 let s:mode_file = findfile('.mode', '.;')
 
-for line in readfile(s:mode_file)
-    call Mode(line)
-endfor
+if !empty(s:mode_file)
+    for line in readfile(s:mode_file)
+        call Mode(line)
+    endfor
+endif
