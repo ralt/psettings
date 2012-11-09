@@ -25,7 +25,7 @@ line:
 That is, if you want to use the `Drupal` mode.
 
 The default modes are in the `modes/` folder of this plugin. You can add
-your own mode by putting the following in your vimrc:
+your own mode folder by putting the following in your vimrc:
 
     let g:modes_custom_path = '/your/path/to/modes/'
 
