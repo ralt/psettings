@@ -26,6 +26,25 @@ function! Mode(mode)
     " Prepend empty string to have / at the beginning of joined path
     call insert(l:path, '')
 
-    " And now source the path
-    execute 'source ' . join(l:path, '/')
+    let l:final_path = join(l:path, '/')
+
+    " Read default path
+    if filereadable(l:final_path)
+        " And now source the path
+        execute 'source ' . l:final_path
+    endif
+
+    " Read custom path added if it exists
+    if exists('g:vim_modes_custom_path')
+        if filereadable(g:vim_modes_custom_path)
+            execute 'source ' . g:vim_modes_custom_path
+        endif
+    endif
 endfunction
+
+" Find the .mode file
+let s:mode_file = findfile('.mode', '.;')
+
+for line in readfile(s:mode_file)
+    call Mode(line)
+endfor
