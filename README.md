@@ -18,9 +18,15 @@ Usage
 Put a `.psettings` file at the root of your project. In this file, put the
 following line:
 
-    Drupal
+    php:
+    module:
+    install:
+    inc:
+        Drupal
 
-That is, if you want to use the `Drupal` project settings.
+That is, if you want to use the `Drupal` project settings for the following
+extensions: `.php`, `.module`, `.install` and `.inc`. You can also use the `*`
+wildcard to have a psetting applied to all your files.
 
 The default settings are in the `settings/` folder of this plugin. You can add
 your own settings folder by putting the following in your vimrc:
@@ -36,6 +42,24 @@ You can put several project settings in your `.psettings` file, each settings
 file will be read sequentially. This allows you to have one "major" settings
 file(for example, all the projects in the PHP language), and several "minor"
 settings modes (Drupal projects, Symfony projects, Zend projects, etc).
+
+Basically, for the following `.psettings` file:
+
+    *:
+        Something
+    php:
+        PHP
+    js:
+        JavaScript
+    css:
+        CSS
+
+The following commands will be executed:
+
+    au BufNewFile,BufRead *.* :call Psettings("Something")
+    au BufNewFile,BufRead *.php :call Psettings("PHP")
+    au BufNewFile,BufRead *.js :call Psettings("JavaScript")
+    au BufNewFile,BufRead *.css :call Psettings("CSS")
 
 If you simply want to run a project settings, you can also run the following
 command:
