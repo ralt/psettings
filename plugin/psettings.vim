@@ -4,12 +4,33 @@
 " Author:        Florian Margaine <florian@margaine.com>
 " =============================================================================
 
+" =============================================================================
+" Default functions part. Handles reading the default psettings and custom.
+" =============================================================================
+
 let s:current_file = expand('<sfile>')
 
 function! Psettings(settings)
+    let l:path = s:FindPath(s:current_file)
+
+    " Read default path
+    if filereadable(l:path)
+        " And now source the path
+        execute 'source ' . l:path
+    endif
+
+    " Read custom path added if it exists
+    if exists('g:psettings_custom_path')
+        if filereadable(g:psettings_custom_path)
+            execute 'source ' . g:psettings_custom_path
+        endif
+    endif
+endfunction
+
+function! s:FindPath(path)
     " We have /path/to/psettings/plugin/psettings.vim
     " And we want /path/to/psettings/settings/<argument>.vim
-    let l:path = split(s:current_file, '/')
+    let l:path = split(path, '/')
 
     " Remove 'psettings.vim'
     call remove(l:path, len(l:path) - 1)
@@ -26,27 +47,23 @@ function! Psettings(settings)
     " Prepend empty string to have / at the beginning of joined path
     call insert(l:path, '')
 
-    let l:final_path = join(l:path, '/')
-
-    " Read default path
-    if filereadable(l:final_path)
-        " And now source the path
-        execute 'source ' . l:final_path
-    endif
-
-    " Read custom path added if it exists
-    if exists('g:psettings_custom_path')
-        if filereadable(g:psettings_custom_path)
-            execute 'source ' . g:psettings_custom_path
-        endif
-    endif
+    return join(l:path, '/')
 endfunction
 
-" Find the .mode file
+" =============================================================================
+" Reading the .psettings file part.
+" =============================================================================
+
+" Find the .psettings file
 let s:psettings_file = findfile('.psettings', '.;')
 
-if !empty(s:psettings_file)
-    for line in readfile(s:psettings_file)
-        call Psettings(line)
-    endfor
-endif
+s:HandleFile(s:psettings_file)
+
+function! s:HandleFile(file)
+    " It crashes it the files doesn't exist
+    if !empty(a:file)
+        for line in readfile(a:file)
+            call Psettings(line)
+        endfor
+    endif
+endfunction
