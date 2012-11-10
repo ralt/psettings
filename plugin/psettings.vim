@@ -1,27 +1,27 @@
 " =============================================================================
-" File:          plugin/vim-modes.vim
+" File:          plugin/psettings.vim
 " Description:   Defines main functions of the plugin.
 " Author:        Florian Margaine <florian@margaine.com>
 " =============================================================================
 
 let s:current_file = expand('<sfile>')
 
-function! Mode(mode)
-    " We have /path/to/vim-modes/plugin/vim-modes.vim
-    " And we want /path/to/vim-modes/modes/<argument>.vim
+function! Psettings(settings)
+    " We have /path/to/psettings/plugin/psettings.vim
+    " And we want /path/to/psettings/settings/<argument>.vim
     let l:path = split(s:current_file, '/')
 
-    " Remove 'vim-modes.vim'
+    " Remove 'psettings.vim'
     call remove(l:path, len(l:path) - 1)
 
     " Remove 'plugin'
     call remove(l:path, len(l:path) - 1)
 
-    " Append 'modes'
-    call add(l:path, 'modes')
+    " Append 'settings'
+    call add(l:path, 'settings')
 
     " Append '<argument>.vim'
-    call add(l:path, a:mode . '.vim')
+    call add(l:path, a:settings . '.vim')
 
     " Prepend empty string to have / at the beginning of joined path
     call insert(l:path, '')
@@ -35,18 +35,18 @@ function! Mode(mode)
     endif
 
     " Read custom path added if it exists
-    if exists('g:modes_custom_path')
-        if filereadable(g:modes_custom_path)
-            execute 'source ' . g:modes_custom_path
+    if exists('g:psettings_custom_path')
+        if filereadable(g:psettings_custom_path)
+            execute 'source ' . g:psettings_custom_path
         endif
     endif
 endfunction
 
 " Find the .mode file
-let s:mode_file = findfile('.mode', '.;')
+let s:psettings_file = findfile('.psettings', '.;')
 
-if !empty(s:mode_file)
-    for line in readfile(s:mode_file)
-        call Mode(line)
+if !empty(s:psettings_file)
+    for line in readfile(s:psettings_file)
+        call Psettings(line)
     endfor
 endif

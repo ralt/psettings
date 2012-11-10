@@ -1,12 +1,10 @@
-vim-modes
+psettings aka Project Settings
 ===
 
 Description
 ---
 
-This plugin tries to emulate something close to emacs modes.
-
-It allows you to have different vim settings for each project.
+This plugin allows you to have different vim settings for each project.
 
 If you're working with different coding standards (X project has shiftwidth 2,
 Y project has shiftwidth 4, etc), it can become cumbersome to always work with
@@ -17,31 +15,32 @@ This project solves this.
 Usage
 ---
 
-Put a `.mode` file at the root of your project. In this file, put the following
-line:
+Put a `.psettings` file at the root of your project. In this file, put the
+following line:
 
     Drupal
 
-That is, if you want to use the `Drupal` mode.
+That is, if you want to use the `Drupal` project settings.
 
-The default modes are in the `modes/` folder of this plugin. You can add
-your own mode folder by putting the following in your vimrc:
+The default settings are in the `settings/` folder of this plugin. You can add
+your own settings folder by putting the following in your vimrc:
 
-    let g:modes_custom_path = '/your/path/to/modes/'
+    let g:psettings_custom_path = '/your/path/to/settings/'
 
-If a mode is found in both folders, both will be used.
+If a settings file is found in both folders, both will be used.
 
-The names you put in the `.mode` file must match the filename of the mode, less
-the `.vim` extension.
+The names you put in the `.psettings` file must match the filename of the
+settings file, less the `.vim` extension.
 
-You can put several modes in your `.mode` file, each mode will be read
-sequentially. This allows you to have one "major" mode (for example, all the
-projects in the PHP language), and several "minor" modes (Drupal projects,
-Symfony projects, Zend projects, etc).
+You can put several project settings in your `.psettings` file, each settings
+file will be read sequentially. This allows you to have one "major" settings
+file(for example, all the projects in the PHP language), and several "minor"
+settings modes (Drupal projects, Symfony projects, Zend projects, etc).
 
-If you simply want to run a mode, you can also run the following command:
+If you simply want to run a project settings, you can also run the following
+command:
 
-    :call Mode("Drupal")
+    :call Psettings("Drupal")
 
 Roadmap
 ---
@@ -59,4 +58,4 @@ License
 MIT License.
 
 
-   [0]: https://github.com/Ralt/vim-modes/issues?labels=enhancement&page=1&state=open
+   [0]: https://github.com/Ralt/psettings/issues?labels=enhancement&page=1&state=open
