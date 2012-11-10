@@ -63,10 +63,16 @@ vim.</p>
 <p>Put a <code>.psettings</code> file at the root of your project. In this file, put the
 following line:</p>
 
-<pre><code>Drupal
+<pre><code>php:
+module:
+install:
+inc:
+    Drupal
 </code></pre>
 
-<p>That is, if you want to use the <code>Drupal</code> project settings.</p>
+<p>That is, if you want to use the <code>Drupal</code> project settings for the following
+extensions: <code>.php</code>, <code>.module</code>, <code>.install</code> and <code>.inc</code>. You can also use the <code>*</code>
+wildcard to have a psetting applied to all your files.</p>
 
 <p>The default settings are in the <code>settings/</code> folder of this plugin. You can add
 your own settings folder by putting the following in your vimrc:</p>
@@ -83,6 +89,26 @@ settings file, less the <code>.vim</code> extension.</p>
 file will be read sequentially. This allows you to have one "major" settings
 file(for example, all the projects in the PHP language), and several "minor"
 settings modes (Drupal projects, Symfony projects, Zend projects, etc).</p>
+
+<p>Basically, for the following <code>.psettings</code> file:</p>
+
+<pre><code>*:
+    Something
+php:
+    PHP
+js:
+    JavaScript
+css:
+    CSS
+</code></pre>
+
+<p>The following commands will be executed:</p>
+
+<pre><code>au BufNewFile,BufRead *.* :call Psettings("Something")
+au BufNewFile,BufRead *.php :call Psettings("PHP")
+au BufNewFile,BufRead *.js :call Psettings("JavaScript")
+au BufNewFile,BufRead *.css :call Psettings("CSS")
+</code></pre>
 
 <p>If you simply want to run a project settings, you can also run the following
 command:</p>
