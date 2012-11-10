@@ -57,13 +57,54 @@ endfunction
 " Find the .psettings file
 let s:psettings_file = findfile('.psettings', '.;')
 
+function! s:executeSettings(settings)
+    for obj in a:settings
+        for extension in obj['extensions']
+            for psetting in obj['psettings']
+                execute 'au BufNewFile,BufRead *.' . extension . ' :call Psettings("' . psetting . '")<CR>'
+            endfor
+        endfor
+    endfor
+endfunction
+
 function! s:handleFile(file)
+    let l:settings = []
+    let l:current = {}
+    let l:flag = 0
     " It crashes it the files doesn't exist
     if !empty(a:file)
         for line in readfile(a:file)
-            call Psettings(line)
+
+            " Is it an extension?
+            if line =~ ':$'
+                " If the flag is on, it means there is a new item to add
+                " to the l:settings (the previous l:current)
+                if l:flag
+                    call add(l:settings, l:current)
+                    let l:current = {}
+
+                    " Let's not forget to set the flag back
+                    let l:flag = 0
+                endif
+                let l:extension = strpart(line, 0, (strlen(line) - 1))
+
+                if !has_key(l:current, 'extensions')
+                    let l:current['extensions'] = []
+                endif
+
+                call add(l:current['extensions'], l:extension)
+            else
+                if !has_key(l:current, 'psettings')
+                    let l:current['psettings'] = []
+                endif
+
+                call add(l:current['psettings'], substitute(line, ' ', '', 'g'))
+                let l:flag = 1
+            endif
         endfor
     endif
+
+    call s:executeSettings(l:settings)
 endfunction
 
 call s:handleFile(s:psettings_file)
