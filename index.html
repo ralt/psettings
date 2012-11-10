@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Psettings by Ralt</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/Ralt/psettings">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Psettings</h1>
+            <h2>Allows you to have per-project settings files for vim.</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/Ralt/psettings/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Ralt/psettings/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>psettings aka Project Settings</h1>
+
+<h2>Description</h2>
+
+<p>This plugin allows you to have different vim settings for each project.</p>
+
+<p>If you're working with different coding standards (X project has shiftwidth 2,
+Y project has shiftwidth 4, etc), it can become cumbersome to always work with
+vim.</p>
+
+<p>This project solves this.</p>
+
+<h2>Usage</h2>
+
+<p>Put a <code>.psettings</code> file at the root of your project. In this file, put the
+following line:</p>
+
+<pre><code>Drupal
+</code></pre>
+
+<p>That is, if you want to use the <code>Drupal</code> project settings.</p>
+
+<p>The default settings are in the <code>settings/</code> folder of this plugin. You can add
+your own settings folder by putting the following in your vimrc:</p>
+
+<pre><code>let g:psettings_custom_path = '/your/path/to/settings/'
+</code></pre>
+
+<p>If a settings file is found in both folders, both will be used.</p>
+
+<p>The names you put in the <code>.psettings</code> file must match the filename of the
+settings file, less the <code>.vim</code> extension.</p>
+
+<p>You can put several project settings in your <code>.psettings</code> file, each settings
+file will be read sequentially. This allows you to have one "major" settings
+file(for example, all the projects in the PHP language), and several "minor"
+settings modes (Drupal projects, Symfony projects, Zend projects, etc).</p>
+
+<p>If you simply want to run a project settings, you can also run the following
+command:</p>
+
+<pre><code>:call Psettings("Drupal")
+</code></pre>
+
+<h2>Roadmap</h2>
+
+<p>See the <a href="https://github.com/Ralt/psettings/issues?labels=enhancement&amp;page=1&amp;state=open">issue queue</a>.</p>
+
+<h2>Contributors</h2>
+
+<ul>
+<li><a href="http://margaine.com">Florian Margaine</a></li>
+</ul><h2>License</h2>
+
+<p>MIT License.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/Ralt">Ralt</a> can be found on <a href="https://github.com/Ralt/psettings">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-25548348-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
