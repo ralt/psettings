@@ -61,7 +61,7 @@ function! s:executeSettings(settings)
     for obj in a:settings
         for extension in obj['extensions']
             for psetting in obj['psettings']
-                execute 'au BufNewFile,BufRead *.' . extension . ' :call Psettings("' . psetting . '")<CR>'
+                execute 'au BufNewFile,BufRead *.' . extension . ' :call Psettings("' . psetting . '")'
             endfor
         endfor
     endfor
@@ -102,6 +102,10 @@ function! s:handleFile(file)
                 let l:flag = 1
             endif
         endfor
+    endif
+    " add last item to l:settings
+    if l:flag
+        call add(l:settings, l:current)
     endif
 
     call s:executeSettings(l:settings)
